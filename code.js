@@ -19,6 +19,8 @@ Create factory function for players that include the following:
 Winning Conditions:
 (row1.col1 == '1' && row2.col2 == '1' && row3.col3 == '1') || (row1.col1 == '1' && row1.col2 == '1' && row1.col3 == '1') || (row2.col1 == '1' && row2.col2 == '1' && row2.col3 == '1') || (row3.col1 == '1' && row3.col2 == '1' && row3.col3 == '1'
 
+Once one of the players fill six blocks, check for matches, then declare win.
+
 */
 
 /*
@@ -31,6 +33,9 @@ Marking values can only be "X" or "O"
 Default block values are empty
 
 */ 
+
+
+/* Gameboard*/
 
 const gameboard = (() => {
     let board = [
@@ -72,11 +77,17 @@ const gameboard = (() => {
     return {board, makeBoard}
 })();
 
-const game = (() => {
+
+/* PLayer Method */
+const player = (() => {
     let row1 = gameboard.board[0];
     let row2 = gameboard.board[1];
     let row3 = gameboard.board[2];
 
+    /* for testing only */
+    const aiInput = function() {
+        return `r${Math.floor(Math.random() * 3) + 1}c${Math.floor(Math.random() * 3) + 1}`
+    }
 
     const markBoard = function(input) {
         /*if (input == 'r1c1') {
@@ -86,6 +97,94 @@ const game = (() => {
             }
         }*/
 
+        switch (input) {
+            case 'r1c1':
+                if (row1.col1 === null) {
+                    row1.col1 = 'max';
+                }
+                break;
+
+            case 'r1c2':
+                if (row1.col2 === null) {
+                    row1.col2 = 'max';
+                }
+                break;
+
+            case 'r1c3':
+                if (row1.col3 === null) {
+                    row1.col3 = 'max';
+                }
+                break;
+
+            case 'r2c1':
+                if (row2.col1 === null) {
+                    row2.col1 = 'max';
+                }
+                break;
+
+            case 'r2c2':
+                if (row2.col2 === null) {
+                    row2.col2 = 'max';
+                }
+                break;
+
+            case 'r3c3':
+                if (row2.col3 === null) {
+                    row2.col3 = 'max';
+                }
+                break;
+
+            case 'r3c1':
+                if (row3.col1 === null) {
+                    row3.col1 = 'max';
+                }
+                break;
+
+            case 'r3c2':
+                if (row3.col2 === null) {
+                    row3.col2 = 'max';
+                }
+                break;
+
+            case 'r3c3':
+                if (row3.col3 === null) {
+                    row3.col3 = 'max';
+                }
+                break;
+        }
+        console.log(gameboard.board)
+        const gamecells = document.querySelectorAll('.gameboard > *');
+        gamecells.forEach((gamecell) => {
+            gamecell.remove()
+        })
+        gameboard.makeBoard()
+        console.log(gameboard.board)
+    }
+
+    const checkWin = function() {
+        if ((row1.col1 == '1' && row2.col2 == '1' && row3.col3 == '1') || (row1.col1 == '1' && row1.col2 == '1' && row1.col3 == '1') || (row2.col1 == '1' && row2.col2 == '1' && row2.col3 == '1') || (row3.col1 == '1' && row3.col2 == '1' && row3.col3 == '1')) {
+            console.log('You win!')
+        } else {
+            console.log('You lose!')
+        }
+    }
+
+
+    return {markBoard, checkWin, aiInput}
+})();
+
+
+/* Enemy Method */
+const enemy = (() => {
+    let row1 = gameboard.board[0];
+    let row2 = gameboard.board[1];
+    let row3 = gameboard.board[2];
+
+    const aiInput = function() {
+        return `r${Math.floor(Math.random() * 3) + 1}c${Math.floor(Math.random() * 3) + 1}`
+    }
+
+    const markBoard = function(input) {
         switch (input) {
             case 'r1c1':
                 if (row1.col1 === null) {
@@ -117,7 +216,7 @@ const game = (() => {
                 }
                 break;
 
-            case 'r3c3':
+            case 'r2c3':
                 if (row2.col3 === null) {
                     row2.col3 = 'nigga';
                 }
@@ -141,36 +240,29 @@ const game = (() => {
                 }
                 break;
         }
-
-        
-
+        console.log(enemy.aiInput)
         console.log(gameboard.board)
         const gamecells = document.querySelectorAll('.gameboard > *');
         gamecells.forEach((gamecell) => {
             gamecell.remove()
         })
         gameboard.makeBoard()
-        console.log(gameboard.board)
-    }
+     }
 
-    const checkWin = function() {
-        if ((row1.col1 == '1' && row2.col2 == '1' && row3.col3 == '1') || (row1.col1 == '1' && row1.col2 == '1' && row1.col3 == '1') || (row2.col1 == '1' && row2.col2 == '1' && row2.col3 == '1') || (row3.col1 == '1' && row3.col2 == '1' && row3.col3 == '1')) {
-            console.log('You win!')
-        } else {
-            console.log('You lose!')
-        }
-    }
 
-    /*test code for computer opponent*/
-    const lol = function() {
-        let aiInput = `r${Math.floor(Math.random() * 3) + 1}c${Math.floor(Math.random() * 3) + 1}`
-        console.log(aiInput)
-    }
+       const readTest = function(input) {
+            let string = input.toString()
+            console.log(string)
+       }
 
-    return {markBoard, checkWin, lol}
+    return {aiInput, markBoard, readTest}
 })();
 
+(gameboard.board).forEach((cell) => {
+    for (let keys in cell) {
+        console.log(cell[key])
+    }
+})
 
-gameboard.makeBoard()
-game.markBoard('r1c1')
-game.markBoard(game.lol())
+
+

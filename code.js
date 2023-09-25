@@ -64,9 +64,9 @@ const gameboard = (() => {
                 console.log(key)
                 console.log(cell[key])
                 const item = document.createElement('div')
-                if (cell[key] == '0') {
+                if (cell[key] == 'max') {
                     item.style.backgroundColor = 'white';
-                } else if (cell[key] == '1'){
+                } else if (cell[key] == 'nigga'){
                     item.style.backgroundColor = 'black';
                 }
                 square.appendChild(item);
@@ -128,7 +128,7 @@ const player = (() => {
                 }
                 break;
 
-            case 'r3c3':
+            case 'r2c3':
                 if (row2.col3 === null) {
                     row2.col3 = 'max';
                 }
@@ -181,7 +181,9 @@ const enemy = (() => {
     let row3 = gameboard.board[2];
 
     const aiInput = function() {
-        return `r${Math.floor(Math.random() * 3) + 1}c${Math.floor(Math.random() * 3) + 1}`
+        const ans = `r${Math.floor(Math.random() * 3) + 1}c${Math.floor(Math.random() * 3) + 1}`;
+        console.log(ans)
+        return ans
     }
 
     const markBoard = function(input) {
@@ -258,11 +260,7 @@ const enemy = (() => {
     return {aiInput, markBoard, readTest}
 })();
 
-(gameboard.board).forEach((cell) => {
-    for (let keys in cell) {
-        console.log(cell[key])
-    }
-})
 
-
-
+gameboard.makeBoard()
+player.markBoard('r1c1')
+enemy.markBoard(enemy.aiInput())

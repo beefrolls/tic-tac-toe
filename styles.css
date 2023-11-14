@@ -1,0 +1,13 @@
+.gameboard {
+    display: grid;
+    background: pink;
+    height: 500px;
+    width: 500px;
+    gap: 5px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gameboard div {
+    background-color: white;
+}

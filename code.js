@@ -17,6 +17,8 @@ const code = function() {
         row3col3: null,
     }
 
+    let clicks = 0;
+
     blocks.forEach((block) => {
         block.addEventListener('click', function() {
             if (block.id == 'none') {
@@ -27,16 +29,14 @@ const code = function() {
                 let name = block.className.toString()
                 gameboard[name] = 'x';
                 console.log(gameboard)
-                aiInput()
-                /*enemy code*/
-                
-               /* let empty = false;
-                while (empty == false) {
-                    if (gameboard[enemy] == null) {
-                        empty = true;
-                    }
+                clicks = clicks + 1;
+                console.log(clicks)
+                if (clicks <= 4) {
+                    aiInput()
+                } else {
+                    console.log('game ends')
                 }
-                */
+                winningCond()
             } else {
                 console.log('This one is filled')
             }
@@ -62,6 +62,36 @@ const code = function() {
                     }
                 }
             }
+        }
+    }
+
+    const winningCond = function() {
+        if (gameboard.row1col1 == 'x' && gameboard.row1col2 == 'x' && gameboard.row1col3 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row2col1 == 'x' && gameboard.row2col2 == 'x' && gameboard.row2col3 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row3col1 == 'x' && gameboard.row3col2 == 'x' && gameboard.row3col3 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row1col1 == 'x' && gameboard.row2col1 == 'x' && gameboard.row3col1 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row1col2 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col2 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row1col3 == 'x' && gameboard.row2col3 == 'x' && gameboard.row3col3 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row1col1 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col3 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else if (gameboard.row1col3 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col1 == 'x'){
+            console.log('you win')
+            alert('you win')
+        } else {
+            console.log('you lose')
         }
     }
 

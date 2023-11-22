@@ -1,6 +1,7 @@
 Update 11/14
 
 - fix code organization
-- fix issue on AI's end when you only have 1 click left. Whenever you have 1 click left there's only 1 tile left for you to fill and the AI can't process that
+- [DONE] fix issue on AI's end when you only have 1 click left. Whenever you have 1 click left there's only 1 tile left for you to fill and the AI can't process that
+- [DONE] Add delay to winning announcement
 - Add base code for P2P game
 - Add reverse version (AI starts first)

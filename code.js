@@ -31,12 +31,20 @@ const code = function() {
                 console.log(gameboard)
                 clicks = clicks + 1;
                 console.log(clicks)
-                if (clicks <= 4) {
-                    aiInput()
-                } else {
-                    console.log('game ends')
-                }
-                winningCond()
+                setTimeout (function(){
+                    if (clicks <= 4) {
+                        aiInput()
+                    } else {
+                        console.log('game ends')
+                    }
+                }, 500)
+               
+                let delay = 1500;
+                setTimeout(function() {
+                    if (!(winningCondPlayer())) {
+                    winningCondEnemy()
+                    }
+                }, delay)
             } else {
                 console.log('This one is filled')
             }
@@ -65,33 +73,85 @@ const code = function() {
         }
     }
 
-    const winningCond = function() {
+    const winningCondPlayer = function() {
+        let win = null;
         if (gameboard.row1col1 == 'x' && gameboard.row1col2 == 'x' && gameboard.row1col3 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row2col1 == 'x' && gameboard.row2col2 == 'x' && gameboard.row2col3 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row3col1 == 'x' && gameboard.row3col2 == 'x' && gameboard.row3col3 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row1col1 == 'x' && gameboard.row2col1 == 'x' && gameboard.row3col1 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row1col2 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col2 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row1col3 == 'x' && gameboard.row2col3 == 'x' && gameboard.row3col3 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row1col1 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col3 == 'x'){
             console.log('you win')
             alert('you win')
+            win = true;
         } else if (gameboard.row1col3 == 'x' && gameboard.row2col2 == 'x' && gameboard.row3col1 == 'x'){
             console.log('you win')
             alert('you win')
-        } else {
+            win = true;
+        }
+        
+        if (win == true) {
+            return true;
+        }
+    }
+
+    const winningCondEnemy = function() {
+        let lose = null;
+        if (gameboard.row1col1 == 'o' && gameboard.row1col2 == 'o' && gameboard.row1col3 == 'o'){
             console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row2col1 == 'o' && gameboard.row2col2 == 'o' && gameboard.row2col3 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row3col1 == 'o' && gameboard.row3col2 == 'o' && gameboard.row3col3 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row1col1 == 'o' && gameboard.row2col1 == 'o' && gameboard.row3col1 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row1col2 == 'o' && gameboard.row2col2 == 'o' && gameboard.row3col2 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row1col3 == 'o' && gameboard.row2col3 == 'o' && gameboard.row3col3 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row1col1 == 'o' && gameboard.row2col2 == 'o' && gameboard.row3col3 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        } else if (gameboard.row1col3 == 'o' && gameboard.row2col2 == 'o' && gameboard.row3col1 == 'o'){
+            console.log('you lose')
+            alert('you lose')
+            lose = true;
+        }
+
+        if (lose == true) {
+            return true;
         }
     }
 
